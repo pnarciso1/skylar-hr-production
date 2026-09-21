@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 
-// Design tokens: SKYLAR_ENGINEERING_ARCHITECTURE_v4.md §46, §134.
+// Design tokens: docs/SKYLAR_ENGINEERING_ARCHITECTURE_v4.md §46, §134.
 // `theme.colors` (not `extend`) on purpose: the default palette is dropped so
 // off-system colors (blue, gray, white) cannot be used by accident.
 const config: Config = {
