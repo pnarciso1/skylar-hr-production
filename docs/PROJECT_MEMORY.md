@@ -43,6 +43,11 @@ current code. Advisor and company administration roles remain future decisions.
 - Responsive custom UI with lightweight transitions and no blur animation.
 - First Claude conversation slice: protected streaming endpoint and a shared
   Skylar chat surface opened from the Briefing card.
+- Task 2 is implemented: Prepare conversation opens the shared Skylar chat,
+  passes the active employee and briefing context, streams Claude replies, and
+  supports follow-up messages in the same conversation.
+- Skylar chat responses render basic bold text, paragraphs, and bullet points
+  instead of showing raw Markdown markers.
 - Six-beat Live-in-5 flow for an empty admin workspace: workspace context,
   employee creation, situation, clarifying context, plan, and filed state.
 - Live-in-5 uses a dedicated `/onboarding` route so creating the first employee
@@ -67,6 +72,7 @@ current code. Advisor and company administration roles remain future decisions.
 - Briefing card conversation help uses `/api/briefing/conversation`; the
   Anthropic key remains server-only and the UI has a graceful unconfigured
   state.
+- The current local Anthropic model is `claude-haiku-4-5-20251001`.
 - Avoid blur-heavy transitions. Keep motion subtle and performant.
 - Keep profile metadata compact and avoid duplicate note information in the
   employee header.
@@ -126,7 +132,8 @@ current code. Advisor and company administration roles remain future decisions.
 
 ## Verification State
 
-`npm run typecheck`, `npm run lint`, and `npm test` pass.
+`npm run typecheck`, `npm run lint`, `npm test`, and `npm run build` pass after
+the Task 2 integration.
 
 Current test result: 8 test files and 55 tests passing.
 
