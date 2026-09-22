@@ -10,6 +10,8 @@ const serverEnvSchema = z.object({
     .string()
     .min(1)
     .transform((key) => key.replace(/\\n/g, "\n")),
+  ANTHROPIC_API_KEY: z.string().min(1).optional(),
+  ANTHROPIC_MODEL: z.string().min(1).default("claude-haiku-4-5-20251001"),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, FileText } from "lucide-react";
 import { BriefingRoomFrame } from "@/components/briefing/briefing-room-frame";
+import { EditNoteActions } from "@/components/briefing/edit-note-actions";
 import { SectionHero } from "@/components/briefing/section-hero";
 import { ledgerStatusLabel } from "@/features/briefing/status-label";
 import { NotFoundError } from "@/lib/errors";
@@ -57,6 +58,14 @@ export default async function DocumentDetailPage({
             </span>
           </div>
           <p className="mt-6 whitespace-pre-wrap text-lg leading-8 text-ink/75">{note.description}</p>
+          {session.role === "admin" && note.employeeId && (
+            <EditNoteActions
+              noteId={note.id}
+              employeeId={note.employeeId}
+              description={note.description}
+              statusDot={note.statusDot ?? "none"}
+            />
+          )}
         </article>
       </section>
     </BriefingRoomFrame>

@@ -1,5 +1,4 @@
 import {
-  ArrowRight,
   CalendarClock,
   CheckCircle2,
   FileText,
@@ -7,6 +6,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PrepareConversationButton } from "@/components/briefing/prepare-conversation-button";
 import { StatusDot } from "@/components/briefing/status-dot";
 import { cn } from "@/lib/utils/cn";
 import type { BriefingCard as BriefingCardModel } from "@/features/briefing/types";
@@ -159,19 +159,10 @@ export function BriefingCard({
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row md:flex-col 2xl:flex-row">
-            {card.actions.map((action, index) => (
-              <Button
-                key={action.label}
-                variant={index === 0 ? "primary" : "secondary"}
-                className={cn(
-                  "gap-2 sm:min-w-40",
-                  index === 0
-                    ? "bg-ink text-paper hover:bg-ink-2"
-                    : "border-ink/15 text-ink hover:bg-ink/[0.04]",
-                )}
-              >
+            <PrepareConversationButton card={card} />
+            {card.actions.slice(1).map((action) => (
+              <Button key={action.label} variant="secondary" className="gap-2 border-ink/15 text-ink hover:bg-ink/[0.04] sm:min-w-40">
                 <span>{action.label}</span>
-                {index === 0 && <ArrowRight className="size-4" aria-hidden="true" />}
               </Button>
             ))}
           </div>

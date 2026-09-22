@@ -1,6 +1,7 @@
 export const LOGIN_PATH = "/login";
 export const VERIFY_PATH = "/verify";
 export const BRIEFING_PATH = "/briefing";
+export const ONBOARDING_PATH = "/onboarding";
 export const DEFERRED_PATH = "/deferred";
 export const PEOPLE_PATH = "/people";
 export const NEW_PERSON_PATH = "/people/new";
