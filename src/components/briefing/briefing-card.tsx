@@ -6,7 +6,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ConversationPrompt } from "@/components/briefing/conversation-prompt";
+import { PrepareConversationButton } from "@/components/briefing/prepare-conversation-button";
 import { StatusDot } from "@/components/briefing/status-dot";
 import { cn } from "@/lib/utils/cn";
 import type { BriefingCard as BriefingCardModel } from "@/features/briefing/types";
@@ -159,7 +159,7 @@ export function BriefingCard({
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row md:flex-col 2xl:flex-row">
-            <ConversationPrompt card={card} />
+            <PrepareConversationButton card={card} />
             {card.actions.slice(1).map((action) => (
               <Button key={action.label} variant="secondary" className="gap-2 border-ink/15 text-ink hover:bg-ink/[0.04] sm:min-w-40">
                 <span>{action.label}</span>

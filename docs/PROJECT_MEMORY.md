@@ -41,8 +41,8 @@ current code. Advisor and company administration roles remain future decisions.
 - Account menu, logout, quick actions, and Ask Skylar UI surface.
 - Top loading progress indicator.
 - Responsive custom UI with lightweight transitions and no blur animation.
-- First Claude conversation slice: protected streaming endpoint and inline
-  Prepare conversation response surface on the Briefing card.
+- First Claude conversation slice: protected streaming endpoint and a shared
+  Skylar chat surface opened from the Briefing card.
 - Six-beat Live-in-5 flow for an empty admin workspace: workspace context,
   employee creation, situation, clarifying context, plan, and filed state.
 - Live-in-5 uses a dedicated `/onboarding` route so creating the first employee
