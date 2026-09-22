@@ -16,6 +16,37 @@ type SkylarMessage = {
 
 type OpenSkylarEvent = CustomEvent<SkylarContext & { prompt?: string }>;
 
+function SkylarMessageText({ text }: { text: string }) {
+  const lines = text.replace(/\s+-\s+(?=\*\*)/g, "\n- ").split("\n");
+
+  return (
+    <div className="grid gap-2">
+      {lines.map((line, index) => {
+        const trimmed = line.trim();
+        if (!trimmed) return <span key={`space-${index}`} className="h-1" aria-hidden="true" />;
+        if (trimmed.startsWith("- ")) {
+          return (
+            <div key={`bullet-${index}`} className="flex gap-2">
+              <span className="mt-[0.65em] size-1.5 shrink-0 rounded-full bg-ink/45" aria-hidden="true" />
+              <span>{formatSkylarInline(trimmed.slice(2))}</span>
+            </div>
+          );
+        }
+        return <p key={`line-${index}`}>{formatSkylarInline(trimmed)}</p>;
+      })}
+    </div>
+  );
+}
+
+function formatSkylarInline(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+    return <span key={index}>{part}</span>;
+  });
+}
+
 const starterPrompts = [
   "Help me prepare this conversation",
   "What should I save in the note?",
@@ -163,9 +194,9 @@ export function FloatingSkylarAction() {
                   {message.role === "assistant" && (
                     <span aria-hidden="true" className="mb-1 block size-7 shrink-0 bg-[url('/brand/logo.png')] bg-[length:25px_23px] bg-center bg-no-repeat" />
                   )}
-                  <p className={message.role === "user" ? "max-w-[84%] rounded-[14px] rounded-br-sm bg-paper/[0.09] px-4 py-3 text-sm leading-6 text-paper" : "max-w-[88%] rounded-[14px] rounded-bl-sm bg-paper px-4 py-3 text-sm leading-6 text-ink"}>
-                    {message.text || (isLoading ? "Thinking..." : "")}
-                  </p>
+                  <div className={message.role === "user" ? "max-w-[84%] rounded-[14px] rounded-br-sm bg-paper/[0.09] px-4 py-3 text-sm leading-6 text-paper" : "max-w-[88%] rounded-[14px] rounded-bl-sm bg-paper px-4 py-3 text-sm leading-6 text-ink"}>
+                    {message.text ? (message.role === "assistant" ? <SkylarMessageText text={message.text} /> : message.text) : (isLoading ? "Thinking..." : "")}
+                  </div>
                 </div>
               ))}
               {error && <p className="border-l-2 border-risk px-3 py-2 text-sm leading-6 text-risk">{error}</p>}
