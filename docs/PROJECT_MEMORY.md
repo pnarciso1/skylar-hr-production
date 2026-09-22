@@ -1,6 +1,6 @@
 # Skylar Project Memory
 
-Last reviewed: 2026-09-22
+Last reviewed: 2026-09-23
 
 This file is the short working memory for the current repository. The seven
 copied project documents in this folder remain the detailed product,
@@ -94,6 +94,16 @@ current code. Advisor and company administration roles remain future decisions.
 | `/documents/[documentId]` | Ledger record detail |
 
 ## Remaining Product Work
+
+### Next implementation task
+
+**Task 3: Build the real Daily Briefing deck and card actions.**
+
+- Add server-side `/api/briefing/today` ordering by urgency and due date.
+- Make `Prepare`, `Next`, and `Not now` actions functional.
+- Persist deferred items until the next day.
+- Drive the “What&apos;s ahead” sidebar from the same server-owned deck.
+- Replace remaining starter briefing copy with real Firestore-backed state.
 
 ### Highest priority
 
