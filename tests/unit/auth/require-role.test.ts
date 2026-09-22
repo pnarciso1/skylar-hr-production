@@ -12,16 +12,14 @@ const sessionWith = (role: Role): AuthSession => ({
 
 describe("requireRole", () => {
   it("allows a listed role", () => {
-    expect(() => requireRole(sessionWith("manager"), ["manager", "admin"])).not.toThrow();
+    expect(() => requireRole(sessionWith("employee"), ["employee", "admin"])).not.toThrow();
   });
 
   it("denies an unlisted role", () => {
-    expect(() => requireRole(sessionWith("manager"), ["admin"])).toThrow(AuthorizationError);
+    expect(() => requireRole(sessionWith("employee"), ["admin"])).toThrow(AuthorizationError);
   });
 
-  it("does not treat the skylar advisor role as a manager", () => {
-    expect(() => requireRole(sessionWith("skylar"), ["manager", "admin"])).toThrow(
-      AuthorizationError,
-    );
+  it("does not treat an employee as an admin", () => {
+    expect(() => requireRole(sessionWith("employee"), ["admin"])).toThrow(AuthorizationError);
   });
 });

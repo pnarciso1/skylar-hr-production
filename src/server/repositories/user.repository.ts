@@ -10,3 +10,17 @@ export async function findUserById(uid: string): Promise<AppUser | null> {
 
   return { id: snapshot.id, ...appUserSchema.parse(snapshot.data()) };
 }
+
+export async function findActiveUserByEmail(email: string): Promise<AppUser | null> {
+  const snapshot = await adminDb()
+    .collection("users")
+    .where("email", "==", email.trim().toLowerCase())
+    .limit(1)
+    .get();
+
+  const doc = snapshot.docs[0];
+  if (!doc) return null;
+
+  const user = { id: doc.id, ...appUserSchema.parse(doc.data()) };
+  return user.status === "active" ? user : null;
+}

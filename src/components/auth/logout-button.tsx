@@ -1,33 +1,35 @@
 "use client";
 
 import { useState } from "react";
+import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { LOGIN_PATH } from "@/constants/routes";
 import { endServerSession } from "@/features/auth/session-client";
 
-export function LogoutButton() {
-  const [status, setStatus] = useState<"idle" | "pending" | "failed">("idle");
+export function LogoutButton({ children }: { children?: ReactNode }) {
+  const [isPending, setIsPending] = useState(false);
 
   async function logout() {
-    setStatus("pending");
+    setIsPending(true);
     try {
       await endServerSession();
       window.location.replace(LOGIN_PATH);
     } catch {
-      setStatus("failed");
+      window.location.replace(LOGIN_PATH);
     }
   }
 
   return (
     <div>
-      <Button variant="secondary" onClick={logout} disabled={status === "pending"}>
-        {status === "pending" ? "Signing out…" : "Sign out"}
+      <Button
+        variant="secondary"
+        onClick={logout}
+        disabled={isPending}
+        aria-label={children ? "Sign out" : undefined}
+        className={children ? "h-11 w-full gap-2 px-3" : undefined}
+      >
+        {isPending ? "..." : children ?? "Sign out"}
       </Button>
-      {status === "failed" && (
-        <p role="alert" className="mt-2 text-sm text-attention">
-          Sign out failed. Try again.
-        </p>
-      )}
     </div>
   );
 }

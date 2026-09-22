@@ -21,7 +21,7 @@ export function Button({
     <button
       type={type}
       className={cn(
-        "inline-flex h-[52px] items-center justify-center px-6 font-medium",
+        "inline-flex h-[52px] items-center justify-center rounded-md px-6 font-medium",
         "transition-[opacity,background-color] duration-150 motion-reduce:transition-none",
         "disabled:pointer-events-none disabled:opacity-40",
         focusRing,

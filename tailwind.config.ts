@@ -1,6 +1,4 @@
 import type { Config } from "tailwindcss";
-import defaultTheme from "tailwindcss/defaultTheme";
-
 // Design tokens: docs/SKYLAR_ENGINEERING_ARCHITECTURE_v4.md §46, §134.
 // `theme.colors` (not `extend`) on purpose: the default palette is dropped so
 // off-system colors (blue, gray, white) cannot be used by accident.
@@ -18,10 +16,24 @@ const config: Config = {
       hairline: "rgba(242, 239, 232, 0.12)",
     },
     extend: {
-      // Font choice is pending design sign-off (§47); swap the families here only.
+      // Product UI uses a Helvetica-style stack for a quieter, production-grade feel.
       fontFamily: {
-        sans: ["var(--font-geist-sans)", ...defaultTheme.fontFamily.sans],
-        mono: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
+        sans: [
+          "Helvetica Neue",
+          "Helvetica",
+          "Arial",
+          "system-ui",
+          "sans-serif",
+        ],
+        mono: [
+          "var(--font-geist-mono)",
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "monospace",
+        ],
       },
     },
   },

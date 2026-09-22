@@ -27,7 +27,7 @@ export const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
         className={cn(
-          "mt-2 h-[52px] w-full border border-hairline bg-ink-2 px-4 text-paper placeholder:text-paper-3",
+          "mt-2 h-[52px] w-full rounded-xl border border-paper/12 bg-paper/[0.055] px-4 text-paper placeholder:text-paper-3",
           "aria-[invalid=true]:border-attention",
           focusRing,
           className,

@@ -34,6 +34,7 @@ export function EmailForm({ submitLabel, pendingLabel, onSubmit }: EmailFormProp
         type="email"
         autoComplete="email"
         inputMode="email"
+        placeholder="you@company.com"
         error={errors.email?.message}
         {...register("email")}
       />

@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Skylar Briefing Room
 
-## Getting Started
+Skylar is a focused HR workroom for reviewing the next important people
+conversation, keeping employee context close, and saving a clean record.
+The primary experience is an ordered daily briefing, not a generic dashboard
+or chat application.
 
-First, run the development server:
+## Current Scope
+
+The current build includes:
+
+- Passwordless Firebase email-link sign-in.
+- Active-user allowlisting before a magic link can be requested.
+- Secure server sessions with protected server-rendered routes.
+- Two application roles: `admin` and `employee`.
+- Admin-only creation and editing of employee records.
+- Admin-only notes linked to employees.
+- Real Firestore-backed People, Documents, employee profiles, and ledger data.
+- Daily Briefing, Deferred, People, and Documents views.
+- Employee profile details including email, role, location, state, notes, and last update.
+- Searchable employee selection when creating a note.
+- Account menu, logout, quick actions, and the Ask Skylar interaction surface.
+- Top-of-page loading progress and lightweight transitions without blur effects.
+
+Advanced AI-generated guidance, advisor escalation, billing, and full onboarding
+are planned extensions and are not yet implemented.
+
+## Stack
+
+- Next.js 14 App Router
+- React 18 and TypeScript
+- Tailwind CSS
+- Firebase Authentication
+- Firebase Admin SDK
+- Cloud Firestore
+- Zod
+- Vitest
+- lucide-react
+
+## Local Setup
+
+Requirements:
+
+- Node.js `>=22.11`
+- Firebase project credentials
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create `.env.local` from `.env.example` and provide the Firebase client and
+server credentials. Optional provider values are reserved for future AI,
+billing, email, and monitoring integrations.
+
+Run the development server on port 3000:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Verification
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run typecheck
+npm run lint
+npm test
+```
 
-## Learn More
+## Important Routes
 
-To learn more about Next.js, take a look at the following resources:
+| Route | Purpose |
+| --- | --- |
+| `/login` | Passwordless work-email sign-in |
+| `/verify` | Completes the Firebase email link |
+| `/briefing` | Ordered daily HR briefing |
+| `/deferred` | Deferred briefing items |
+| `/people` | Employee index |
+| `/people/[employeeId]` | Employee profile and saved notes |
+| `/people/new` | New employee flow |
+| `/documents` | Saved ledger records |
+| `/documents/[documentId]` | Saved record detail |
+| `/notes/new` | New note flow |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Server Components and server repositories own authentication, authorization,
+company scoping, and Firestore access. Client Components are limited to
+interactive UI such as forms, menus, copy-to-clipboard, progress, and the
+assistant panel.
 
-## Deploy on Vercel
+The main data collections currently used are:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `users`
+- `employees`
+- `employee_ledger_entries`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Admin authorization is enforced on the server through the session role. The
+browser is never trusted for company ID, role, or mutation permissions.
+
+See the full implementation memo in
+[`docs/SKYLAR_ENGINEERING_ARCHITECTURE_v4.md`](docs/SKYLAR_ENGINEERING_ARCHITECTURE_v4.md).

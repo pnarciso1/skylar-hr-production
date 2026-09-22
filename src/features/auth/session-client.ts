@@ -10,6 +10,10 @@ export async function createServerSession(idToken: string): Promise<void> {
 }
 
 export async function endServerSession(): Promise<void> {
-  const response = await fetch("/api/auth/logout", { method: "POST" });
+  const response = await fetch("/api/auth/logout", {
+    method: "POST",
+    credentials: "same-origin",
+    cache: "no-store",
+  });
   if (!response.ok) throw new Error(`Logout request failed (${response.status})`);
 }
