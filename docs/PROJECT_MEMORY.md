@@ -41,6 +41,8 @@ current code. Advisor and company administration roles remain future decisions.
 - Account menu, logout, quick actions, and Ask Skylar UI surface.
 - Top loading progress indicator.
 - Responsive custom UI with lightweight transitions and no blur animation.
+- First Claude conversation slice: protected streaming endpoint and inline
+  Prepare conversation response surface on the Briefing card.
 - Six-beat Live-in-5 flow for an empty admin workspace: workspace context,
   employee creation, situation, clarifying context, plan, and filed state.
 - Live-in-5 uses a dedicated `/onboarding` route so creating the first employee
@@ -60,7 +62,11 @@ current code. Advisor and company administration roles remain future decisions.
 - Only provisioned active email addresses may request a sign-in link.
 - Employee notes belong in the unified employee ledger.
 - Documents are ledger records, not a separate document-vault product.
-- Ask Skylar is a future assistant surface; it is not connected to Claude yet.
+- The floating Ask Skylar surface remains a future assistant surface; the
+  Briefing card now has the first Claude-backed conversation action.
+- Briefing card conversation help uses `/api/briefing/conversation`; the
+  Anthropic key remains server-only and the UI has a graceful unconfigured
+  state.
 - Avoid blur-heavy transitions. Keep motion subtle and performant.
 - Keep profile metadata compact and avoid duplicate note information in the
   employee header.
