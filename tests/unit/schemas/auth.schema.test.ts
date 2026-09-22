@@ -36,7 +36,7 @@ describe("appUserSchema", () => {
   const valid = {
     companyId: "company-a",
     email: "m@acme.com",
-    role: "manager",
+    role: "admin",
     status: "active",
   };
 

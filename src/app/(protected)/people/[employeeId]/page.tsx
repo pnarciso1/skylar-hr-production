@@ -5,6 +5,7 @@ import { ArrowLeft, CalendarClock, CheckCircle2, FileText, MapPin } from "lucide
 import type { LucideIcon } from "lucide-react";
 import { BriefingRoomFrame } from "@/components/briefing/briefing-room-frame";
 import { CopyEmailButton } from "@/components/briefing/copy-email-button";
+import { DeleteEmployeeButton } from "@/components/briefing/delete-employee-button";
 import { EditEmployeeProfile } from "@/components/briefing/edit-employee-profile";
 import { PEOPLE_PATH } from "@/constants/routes";
 import { ledgerStatusLabel } from "@/features/briefing/status-label";
@@ -60,7 +61,12 @@ export default async function EmployeeProfilePage({
               <ArrowLeft className="size-4" aria-hidden="true" />
               Back to people
             </Link>
-            {canEdit && <EditEmployeeProfile employee={employee} />}
+            {canEdit && (
+              <div className="flex items-center gap-2">
+                <EditEmployeeProfile employee={employee} />
+                <DeleteEmployeeButton employeeId={employee.id} employeeName={employee.name} />
+              </div>
+            )}
           </div>
 
           <div className="mt-4">

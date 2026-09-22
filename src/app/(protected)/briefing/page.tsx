@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { BriefingShell } from "@/components/briefing/briefing-shell";
 import { getStarterBriefingDeck } from "@/features/briefing/starter-deck";
+import { ONBOARDING_PATH } from "@/constants/routes";
 import { requirePageSession } from "@/server/auth/require-session";
 import {
   listCompanyEmployees,
@@ -16,6 +18,10 @@ export default async function BriefingPage() {
     listCompanyLedger(session.companyId),
   ]);
   const cards = getStarterBriefingDeck(session, { employees, ledger });
+
+  if (session.role === "admin" && employees.length === 0) {
+    redirect(ONBOARDING_PATH);
+  }
 
   return <BriefingShell session={session} cards={cards} />;
 }
