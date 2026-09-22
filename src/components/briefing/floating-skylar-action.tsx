@@ -157,11 +157,16 @@ export function FloatingSkylarAction() {
                 </div>
               </>
             )}
-            <div className="grid gap-3">
+            <div className="grid gap-4">
               {messages.map((message, index) => (
-                <p key={`${message.role}-${index}`} className={message.role === "user" ? "ml-8 bg-paper/[0.08] px-4 py-3 text-sm leading-6 text-paper" : "mr-5 bg-paper px-4 py-3 text-sm leading-6 text-ink"}>
-                  {message.text || (isLoading ? "Thinking..." : "")}
-                </p>
+                <div key={`${message.role}-${index}`} className={message.role === "user" ? "flex justify-end" : "flex items-end gap-2"}>
+                  {message.role === "assistant" && (
+                    <span aria-hidden="true" className="mb-1 block size-7 shrink-0 bg-[url('/brand/logo.png')] bg-[length:25px_23px] bg-center bg-no-repeat" />
+                  )}
+                  <p className={message.role === "user" ? "max-w-[84%] rounded-[14px] rounded-br-sm bg-paper/[0.09] px-4 py-3 text-sm leading-6 text-paper" : "max-w-[88%] rounded-[14px] rounded-bl-sm bg-paper px-4 py-3 text-sm leading-6 text-ink"}>
+                    {message.text || (isLoading ? "Thinking..." : "")}
+                  </p>
+                </div>
               ))}
               {error && <p className="border-l-2 border-risk px-3 py-2 text-sm leading-6 text-risk">{error}</p>}
               <div ref={messagesEndRef} />
